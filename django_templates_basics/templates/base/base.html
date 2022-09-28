@@ -1,0 +1,42 @@
+{% load tags %}
+{%  load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block page_title %} My site {% endblock %}</title>
+    {# Wrong way to load CSS #}
+    {#     <link rel="stylesheet" href="/static/site.css">#}
+    <link rel="stylesheet" href="{% static 'site.css' %}">
+    {# Site CSS #}
+    <style>
+        h1 {
+            color: purple;
+        }
+    </style>
+    {# Additional block for page specific CSS #}
+    {% block styles %} {% endblock %}
+    {%  block head_scripts %} {% endblock %}
+</head>
+<body>
+{% block body_scripts %}
+{% endblock %}
+{# This is a test comment #}
+HTML Nav:
+<nav>
+    <a href="{% url 'index' %}">Go to home</a>
+    <a href="{% url 'redirect to home' %}">Redirect to home</a>
+</nav>
+Tag Nav:
+{% app_nav 'index' 'redirect to home' 'about' %}
+
+{# Placeholder for child templates to use #}
+{# page_content is a custom/chosen name #}
+{% block page_content %}
+{% endblock %}
+{# 'include' when no Python logic needed #}
+{# 'custom tags' when Python logic is needed #}
+{% include 'partials/footer.html' %}
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load filters %} {# file name #}
+{% load tags %}
+
+    {% block page_title %}{{ title }} {% endblock %}
+    {% block page_content %}
+    {{ csrf_token }}
+    <h1>{% sample_tag %}</h1>
+    <h1>{% sample_tag 17 'asd' False yes='True' %}</h1>
+    <h1>Original values: {{ values }}</h1>
+    <h1>Filtered values: {{ values|odd }}</h1> {# odd is the name of the filter #}
+    <h1>
+        Original: {{ title }} : {{ value }}
+    </h1>
+    <h1>
+        Upped: {{ title|upper }} : {{ value }}
+    </h1>
+    <h1>
+        Capped first: {{ title|capfirst }} : {{ value }}
+    </h1>
+    <h1>
+        Lowered then capped: {{ title|lower|capfirst }} : {{ value }}
+    </h1>
+    {% comment %}
+    everything here
+    is a comment
+    To comment multi lines in PyCharm use 'CTRL' + '/'
+    {% endcomment %}
+    <h1>{{ current_time }}</h1>
+    <h1>{{ current_time|date:'d/m/y' }}</h1>
+    <h1>Custom filter: {{ current_time|app_style }}</h1>
+    <h2>{{ student.get_info }}</h2>
+    <h2>
+        {% if students %}
+        {{ students|join:', ' }}
+        {% else %}
+            No students!
+        {% endif %}
+    </h2>
+    <h3>Pure</h3>
+    <ul>
+        {% for student in students %}
+            <li>{{ student }}</li>
+        {% empty %}
+            <li>No students!</li>
+        {% endfor %}
+    </ul>
+    <h3>With 'ifchanged'</h3>
+    <ul>
+        {% for student in students %}
+            {% ifchanged student %}
+                <li>{{ student }}</li>
+            {% endifchanged %}
+        {% endfor %}
+    </ul>
+    <h3> With custom tag:</h3>
+    <ul>
+        {% student_info student %}
+    </ul>
+    {% endblock %}
