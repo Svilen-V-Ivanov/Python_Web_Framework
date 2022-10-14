@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Model forms
+{% endblock %}
+
+{% block content %}
+
+   <h3>Default form</h3>
+<form action="{% url 'model index' %}" method="post">
+    {{ form }}
+    {%  csrf_token %}
+    <button>Create</button>
+</form>
+<h3>Manual form</h3>
+<form action="{% url 'model index' %}" method="post">
+    {% for field in form %}
+        <label for="{{ field.id_for_label }}">
+            <strong>{{ field.label }}</strong>
+            {{ field }}
+        </label>
+
+    {% endfor %}
+    {%  csrf_token %}
+    <button>Create</button>
+</form>
+
+{% endblock %}
