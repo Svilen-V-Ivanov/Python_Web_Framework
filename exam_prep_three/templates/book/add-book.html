@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static '/images/library.jpg' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <title>Online Books Library</title>
+</head>
+
+<body>
+    <div id="container">
+        <header id="site-header">
+
+            <!-- Navigation -->
+            <nav class="navbar">
+                <section class="navbar-dashboard">
+                    <a href="{% url 'index' %}">Dashboard</a>
+                    <div id="user">
+                        <span>Welcome, {{ profile.first_name }}</span>
+                        <a class="button" href="{% url 'add book' %}">Add Book</a>
+                        <a class="button" href="{% url 'details profile' %}">Profile</a>
+                    </div>
+                </section>
+            </nav>
+        </header>
+
+        <!-- Add Book Page -->
+        <section id="create-page" class="create">
+            <form action="{% url 'add book' %}" method="post">
+                <fieldset>
+                    <legend>Add New Book</legend>
+{#                    <label for="title">Title</label>#}
+{#                    <input type="text" name="title" maxlength="30" required="" id="title" placeholder="Title">#}
+{#                    <label for="description">Description</label>#}
+{#                    <textarea name="description" cols="40" rows="100" required="" id="description" placeholder="Description"></textarea>#}
+{#                    <label for="image">Image</label>#}
+{#                    <input type="url" name="image-url" maxlength="200" required="" id="image" placeholder="Image">#}
+{#                    <label for="type">Type</label>#}
+{#                    <input type="text" name="type" maxlength="30" required="" id="type" placeholder="Fiction, Novel, Crime..">#}
+                    {{ form }}
+                    <input class="button submit" type="submit" value="Add Book">
+                    {% csrf_token %}
+                </fieldset>
+            </form>
+        </section>
+
+        <footer id="site-footer">
+            <p>Python Web Basics Retake Exam @SoftUni</p>
+        </footer>
+    </div>
+</body>
+
+</html>
